@@ -13,6 +13,12 @@ body {
     width: 80%;
     display: flex;
 }
+h2{
+    color: variables.$color-primary;
+}
+p {
+    color: variables.$color-secondary;
+}
 a {
     text-decoration: none;
 }
