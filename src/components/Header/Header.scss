@@ -1,0 +1,21 @@
+@use '../../variables';
+
+.header {
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.301);
+    color: variables.$color-primary;
+    .container {
+        justify-content: space-between;
+
+        .header_loginSection {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 1.25rem;
+        }
+    }
+}
