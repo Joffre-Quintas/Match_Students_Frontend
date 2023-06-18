@@ -1,0 +1,18 @@
+@use '../../variables';
+
+button {
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: 1rem;
+    width: 150px;
+    background-color: variables.$color_primary;
+    color: variables.$color_contrast;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all .3s linear;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    &:hover {
+        background-color: variables.$color_secondary;
+    }
+}

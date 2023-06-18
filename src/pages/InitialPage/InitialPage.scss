@@ -15,13 +15,16 @@
 
         &:nth-child(2) {
             background-color: rgb(28, 28, 31);
-            height: 50%;
+            height: 50vh;
             & > .container {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-around;
                 height: 100%;
             }
+        }
+        &:nth-child(3){
+            height: 50vh;
         }
     }
 
@@ -41,6 +44,19 @@
             gap: 1rem;   
         }
     }
+    .inviteToRegister {   
+        & .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 100%;
 
+            & .textField {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+            }
+        }
+    }
     
 }

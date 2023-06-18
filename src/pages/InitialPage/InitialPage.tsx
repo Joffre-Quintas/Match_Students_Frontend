@@ -1,5 +1,6 @@
 import './InitialPage.scss';
 import CardUtil from '../../components/CardUtil/CardUtil';
+import { Link } from 'react-router-dom';
 
 //Images
 import img1 from '../../assets/imgs/initialPage/img1.jpg';
@@ -10,6 +11,7 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import { GiTeamIdea } from 'react-icons/gi';
 import { BiNetworkChart } from 'react-icons/bi';
 import { MdOutlineWifiFind } from 'react-icons/md';
+import Button from '../../components/Button/Button';
 
 export default function InitialPage(){
     return(
@@ -56,7 +58,20 @@ export default function InitialPage(){
                     </div>
                 </div>
             </section>
-            <section></section> 
+            <section className='inviteToRegister'>
+                <div className="container">
+                    <div className="textField">
+                        <h2>Cadastre-se</h2>
+                        <p>Ainda não fez o cadastro? Não perca mais tempo, rápido e fácil!</p>
+                        <Button content='Cadastre-se'/>
+                    </div>
+                    <div className="textField">
+                        <h2>Já Possui Cadastro?</h2>
+                        <p>Seja bem vindo novamente!</p>
+                        <Link to={'/home'}><Button content='Prossiga >'/></Link>
+                    </div>
+                </div>
+            </section> 
         </div>
     )
 }
