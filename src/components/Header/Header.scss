@@ -10,12 +10,24 @@
     color: variables.$color-primary;
     .container {
         justify-content: space-between;
-
+        .header_logo{
+            cursor: pointer;
+        }
         .header_loginSection {
             display: flex;
             gap: 8px;
             align-items: center;
             font-size: 1.25rem;
+            transition: all .3s linear;
+            cursor: pointer;
+
+            &:hover {
+                color: variables.$color-secondary;
+            }
+
+            & svg {
+                scale: 1.25;
+            }
         }
     }
 }

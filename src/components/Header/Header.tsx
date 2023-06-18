@@ -5,7 +5,7 @@ export default function Header() {
     return(
         <header className='header'>          
             <div className="container">
-                <div>
+                <div className='header_logo'>
                     <h1>LOGO</h1>
                 </div>
                 <div className='header_loginSection'>
