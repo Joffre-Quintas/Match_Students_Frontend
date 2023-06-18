@@ -9,7 +9,7 @@ export default function Header() {
                     <h1>LOGO</h1>
                 </div>
                 <div className='header_loginSection'>
-                    <p>Faça Login</p>
+                    <h6>Faça Login</h6>
                     <RiAccountCircleLine/>
                 </div>
             </div>           

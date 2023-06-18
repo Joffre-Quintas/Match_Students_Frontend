@@ -1,0 +1,27 @@
+@use '../../variables';
+
+section .utils{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    
+    &_util {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        &_icon {
+            & > svg {
+                font-size: 2rem;
+                color: variables.$color_secondary;
+            }
+        }
+        &_utilDescription {
+            text-align: center;
+            & > h4 {
+                color: variables.$color_primary;
+                font-size: 1.25rem;
+                margin: .5rem 0;
+            }
+            
+        }
+    }
+}

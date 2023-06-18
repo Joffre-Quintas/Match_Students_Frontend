@@ -6,9 +6,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.301);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
     color: variables.$color-primary;
+
     .container {
+        display: flex;
         justify-content: space-between;
         .header_logo{
             cursor: pointer;
@@ -17,16 +19,12 @@
             display: flex;
             gap: 8px;
             align-items: center;
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             transition: all .3s linear;
             cursor: pointer;
 
             &:hover {
                 color: variables.$color-secondary;
-            }
-
-            & svg {
-                scale: 1.25;
             }
         }
     }
