@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import SectionPeriod from "../../components/SectionPeriod/SectionPeriod";
 import IStudent from '../../types/IStudents';
+import Loading from "../../components/Loading/Loading";
 
 export default function Home() {
     const [users, setUsers] = useState([]);
@@ -14,8 +15,10 @@ export default function Home() {
         loadData();
     }, []);
 
-    if (!users) {
-        return (<div className="container"><h1>Loading...</h1></div>);
+    if (users.length == 0) {
+        return (<div className="container">
+            <Loading/>
+        </div>);
     } else {
         return (
             <div className="container">

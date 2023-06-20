@@ -17,7 +17,7 @@ interface SectionPeriodProps {
 export default function SectionPeriod(props: SectionPeriodProps) {
   const [show, setShow] = useState(false);
 
-
+  
   return (
     <section className='period'>
       <h2 className='period_title'>{props.period}º Período</h2>

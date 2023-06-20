@@ -1,0 +1,73 @@
+@use '../../variables';
+
+.loading {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+
+
+    &_text {
+        color: variables.$color-primary;
+        font-size: 2rem;
+    }
+    &_dot {
+        width: 10px;
+        height: 10px;
+        background-color: variables.$color-primary;
+        border-radius: 50%;
+    }
+}
+
+.dot1 {
+    animation: pulsebg 1s infinite .8s linear ;
+}
+.dot2 {
+    animation: pulsebg 1s infinite .9s linear ;
+}
+.dot3 {
+    animation: pulsebg 1s infinite 1s linear ;
+}
+.letter1 {
+    animation: pulsetxt 1s infinite .1s linear ;
+}
+.letter2 {
+    animation: pulsetxt 1s infinite .2s linear ;
+}
+.letter3 {
+    animation: pulsetxt 1s infinite .3s linear ;
+}
+.letter4 {
+    animation: pulsetxt 1s infinite .4s linear ;
+}
+.letter5 {
+    animation: pulsetxt 1s infinite .5s linear ;
+}
+.letter6 {
+    animation: pulsetxt 1s infinite .6s linear ;
+}
+.letter7 {
+    animation: pulsetxt 1s infinite .7s linear ;
+}
+
+@keyframes pulsebg {
+    0% {
+        background-color: variables.$color-primary;
+    }
+
+    100% {
+        background-color: variables.$color-secondary;
+    }
+}
+@keyframes pulsetxt {
+    0% {
+        color: variables.$color-primary;
+    }
+
+    100% {
+        color: variables.$color-secondary;
+    }
+}
