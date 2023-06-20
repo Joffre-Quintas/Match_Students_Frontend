@@ -34,7 +34,7 @@ export default function SectionPeriod(props: SectionPeriodProps) {
                 <p>{student.turn}</p>
               </div>
               <div>
-                <h6>Podem mentorar?</h6>
+                <h6>Pode mentorar?</h6>
                 <p>{student.isAvaliable ? 'Sim' : 'Não'}</p>
               </div>
               <MdOutlineKeyboardArrowDown
