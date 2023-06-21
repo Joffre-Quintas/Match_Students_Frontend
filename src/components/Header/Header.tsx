@@ -1,8 +1,12 @@
 import { RiAccountCircleLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 import './Header.scss';
 
 export default function Header() {
+    const { user } = useContext(AuthContext);
+
 
     return(
         <header className='header'>          
@@ -13,7 +17,7 @@ export default function Header() {
                     </Link>
                 </div>
                 <Link to={'/login'} className='header_loginSection'>
-                    <h6>Faça login</h6>
+                    <h6>{typeof user == 'string' ? user : 'Fazer login'}</h6>
                     <RiAccountCircleLine/>
                 </Link>
             </div>           

@@ -7,9 +7,9 @@ interface IAuthContext {
     user: IUser;
     setUser: (user: IUser) => string | null | void;
 }
-const AuthContext = createContext<IAuthContext>(null!)
+export const AuthContext = createContext<IAuthContext>(null!)
 
-export default function AuthProvider ({children}:{children: React.ReactNode}) {
+export default function AuthProvider ({children}:{children: JSX.Element}) {
     const [user, setUser] = useState<IUser>(null!); 
 
     return (
