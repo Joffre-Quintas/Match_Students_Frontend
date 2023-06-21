@@ -89,7 +89,7 @@ export default function SectionPeriod(props: SectionPeriodProps) {
             )}
             <div className='period_listStudents_cardStudent_lastSection'>
               <div className='lastSection_contact'>
-                <a target='_blank' href={`https://api.whatsapp.com/send?phone=${student.phone}`}>
+                <a target='_blank' href={`https://api.whatsapp.com/send?phone=55${student.phone}`}>
                     <h6>Entre em contato</h6>
                     <div>
                         <AiOutlineWhatsApp/>
