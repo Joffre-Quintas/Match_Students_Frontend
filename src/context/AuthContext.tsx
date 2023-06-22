@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { createContext, useState } from 'react';
 interface IUser {
     user: string | null

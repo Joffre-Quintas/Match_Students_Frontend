@@ -1,9 +1,13 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useContext, useState } from 'react';
 import Button from '../../components/Button/Button';
 import './Login.scss';
+import { AuthContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
     const [formLogin, setFormLogin ] = useState({})
+    const { setUser } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     function handleInputChange(e:ChangeEvent<HTMLInputElement>) {
         const fieldValue = e.target.value;
@@ -19,14 +23,25 @@ export default function Login() {
     
     async function handleLogin(e:FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        const response = await fetch('https://match-students-api.onrender.com/login', {
+        try {
+            const response = await fetch('https://match-students-api.onrender.com/login', {
             method: 'POST',
             headers: {
                 'Content-type':'application/json'
             },
             body: JSON.stringify(formLogin)
-        })
-        console.log(await response.json())
+            })
+            if(!response.ok) {
+                throw new Error('A solicitação falhou.')
+            }
+            const responseJSON = await response.json();
+            localStorage.setItem('conectaAlunosUser', await responseJSON.token)
+            setUser(await responseJSON.completeName)
+            navigate('/home')
+        } catch (err) {
+            console.error(err)
+        }
+        
     }
     return(
         <div className='loginContainer'>
