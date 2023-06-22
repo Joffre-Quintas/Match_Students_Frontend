@@ -35,7 +35,7 @@ export default function Login() {
                 throw new Error('A solicitação falhou.')
             }
             const responseJSON = await response.json();
-            localStorage.setItem('conectaAlunosUser', await responseJSON.token)
+            localStorage.setItem('conectaAlunosUser', JSON.stringify(await responseJSON))
             setUser(await responseJSON.completeName)
             navigate('/home')
         } catch (err) {
