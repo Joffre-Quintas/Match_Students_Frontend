@@ -14,6 +14,7 @@ export default function Header() {
         const dataUserLogged = JSON.parse(storedUser);
         setUser(dataUserLogged.completeName); 
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

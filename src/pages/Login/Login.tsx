@@ -3,6 +3,7 @@ import Button from '../../components/Button/Button';
 import './Login.scss';
 import { AuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { URL } from '../../utils/URL';
 
 export default function Login() {
     const [formLogin, setFormLogin ] = useState({})
@@ -24,7 +25,7 @@ export default function Login() {
     async function handleLogin(e:FormEvent<HTMLFormElement>) {
         e.preventDefault()
         try {
-            const response = await fetch('https://match-students-api.onrender.com/login', {
+            const response = await fetch(`${URL}/login`, {
             method: 'POST',
             headers: {
                 'Content-type':'application/json'

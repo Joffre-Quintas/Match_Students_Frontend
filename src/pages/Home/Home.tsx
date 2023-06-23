@@ -3,12 +3,14 @@ import SectionPeriod from "../../components/SectionPeriod/SectionPeriod";
 import IStudent from '../../types/IStudents';
 import Loading from "../../components/Loading/Loading";
 
+import { URL } from "../../utils/URL";
+
 export default function Home() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
         async function loadData() {
-            const data = await fetch('https://match-students-api.onrender.com/home');
+            const data = await fetch(`${URL}/home`);
             const dataConverted = await data.json();
             setUsers(dataConverted);
         }
