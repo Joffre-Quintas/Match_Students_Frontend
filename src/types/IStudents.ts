@@ -7,7 +7,7 @@ export default interface IStudent {
     period: number;
     turn: number;
     course: number;
-    knowledge: string;
+    knowledge: string[];
     isAvaliable: boolean;
     interest: string[];
     email: string;

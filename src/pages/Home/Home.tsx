@@ -6,25 +6,25 @@ import Loading from "../../components/Loading/Loading";
 import { URL } from "../../utils/URL";
 
 export default function Home() {
-    const [users, setUsers] = useState([]);
+    const [student, setStudent] = useState([]);
 
     useEffect(() => {
         async function loadData() {
             const data = await fetch(`${URL}/home`);
             const dataConverted = await data.json();
-            setUsers(dataConverted);
+            setStudent(dataConverted);
         }
         loadData();
     }, []);
 
-    if (users.length == 0) {
+    if (student.length == 0) {
         return (<div className="container">
             <Loading/>
         </div>);
     } else {
         return (
             <div className="container">
-                {Object.values(users).map((users: IStudent[], index: number) => (
+                {Object.values(student).map((users: IStudent[], index: number) => (
                     <SectionPeriod key={index} period={index + 1} arr={users} />
                 ))}
             </div>

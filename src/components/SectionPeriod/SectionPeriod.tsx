@@ -42,6 +42,21 @@ export default function SectionPeriod(props: SectionPeriodProps) {
                 onClick={() => setShow((current) => !current)}
               />
             </div>
+            {student.knowledge && student.knowledge.length !== 0 && (
+              <div className='period_listStudents_cardStudent_interest'>
+                <h6>Conhecimento em</h6>
+                <div className='period_listStudents_cardStudent_interest_carousselFlags'>
+                  {student.knowledge.map((tutor: string, index: number) => (
+                    <p
+                      key={index}
+                      className='period_listStudents_cardStudent_interest_carousselFlags_flags'
+                    >
+                      {tutor}
+                    </p>
+                  ))}
+                </div>
+              </div>
+            )}
             {student.interest.length !== 0 && (
               <div className='period_listStudents_cardStudent_interest'>
                 <h6>Interesses</h6>
@@ -72,6 +87,7 @@ export default function SectionPeriod(props: SectionPeriodProps) {
                 </div>
               </div>
             )}
+            
             {student.student && student.student.length !== 0 && (
               <div className='period_listStudents_cardStudent_interest'>
                 <h6>Mentorado por</h6>

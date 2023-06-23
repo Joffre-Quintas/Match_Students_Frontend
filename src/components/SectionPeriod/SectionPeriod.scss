@@ -53,6 +53,10 @@
             }
             &_interest {
                 &_carousselFlags {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: .5rem;
+
                     &_flags {
                         padding: .25rem .5rem;
                         border-radius: 16px;
@@ -60,6 +64,8 @@
                         width: fit-content;
                         color: variables.$color-contrast;
                         font-weight: 500;
+                        min-width: 50px;
+                        text-align: center;
                     }
                 }
             }
