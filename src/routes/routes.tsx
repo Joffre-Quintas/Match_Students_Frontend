@@ -3,6 +3,7 @@ import InitialPage from '../pages/InitialPage/InitialPage';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 import PrivateRoute from '../middlewares/PrivateRoute';
+import Registration from '../pages/Registration/Registration';
 
 
 export default function AppRoutes() {
@@ -11,6 +12,7 @@ export default function AppRoutes() {
         <Routes>
             <Route path="/" element={<InitialPage />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/registration" element={<Registration />} />
             <Route path="/home" element={<PrivateRoute><Home/></PrivateRoute>} />
             
         </Routes>

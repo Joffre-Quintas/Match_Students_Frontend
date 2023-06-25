@@ -12,6 +12,7 @@ button {
     font-size: 1rem;
     transition: all .3s linear;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+
     &:hover {
         background-color: variables.$color_secondary;
     }

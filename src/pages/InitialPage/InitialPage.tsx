@@ -63,7 +63,7 @@ export default function InitialPage(){
                     <div className="textField">
                         <h2>Cadastre-se</h2>
                         <p>Ainda não fez o cadastro? Não perca mais tempo, rápido e fácil!</p>
-                        <Button content='Cadastre-se'/>
+                        <Link to={'/registration'}><Button content='Cadastre-se'/></Link>
                     </div>
                     <div className="textField">
                         <h2>Já Possui Cadastro?</h2>
