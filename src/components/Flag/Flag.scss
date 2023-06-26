@@ -1,0 +1,15 @@
+@use '../../variables';
+
+.flag {
+    padding: .25rem .5rem;
+    border-radius: 16px;
+    background-color: variables.$color-primary;
+    width: fit-content;
+    color: variables.$color-contrast;
+    font-weight: 400;
+    font-size: 14px;
+    min-width: 50px;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}

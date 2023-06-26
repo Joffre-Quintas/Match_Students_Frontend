@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useContext, useState } from 'react';
 import Button from '../../components/Button/Button';
 import './Login.scss';
 import { AuthContext } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { URL } from '../../utils/URL';
 
 export default function Login() {
@@ -57,7 +57,7 @@ export default function Login() {
                     <input type="password" name='password' id='password' placeholder='Digite sua senha' onChange={(e) => handleInputChange(e)}/>
                 </div>
                 <Button content='Entrar' type='submit'/>
-                <p>Ainda não possui cadastro? <a href="" style={{textDecoration:'underline'}}>Cadastre-se</a></p>
+                <p>Ainda não possui cadastro? <Link to='/registration' style={{textDecoration:'underline'}}>Cadastre-se</Link></p>
             </form>
         </div>
     )
