@@ -1,12 +1,11 @@
-import { ChangeEvent, FormEvent, KeyboardEvent, useState } from 'react';
-import Button from '../../components/Button/Button';
+import { ChangeEvent, KeyboardEvent, useState, FormEvent } from 'react';
 import './Registration.scss';
 import Flag from '../../components/Flag/Flag';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
+
 
 export default function Registration() {
-    // const [arrayKnowledge, setArrayKnowledge] = useState([])
-    // const [arrayInterest, setArrayInterest] = useState([])
+    const [arrayKnowledge, setArrayKnowledge] = useState<string[]>([])
+    const [arrayInterest, setArrayInterest] = useState<string[]>([])
     const [formData, setDataForm] = useState({knowledge: [] as string[], interest: [] as string[]});
     function handleInputTextChange(e: ChangeEvent<HTMLInputElement>) {
         const fieldValue = e.target.value;
@@ -28,41 +27,27 @@ export default function Registration() {
             }
         })
     }
+    function handleFieldArraysForm(e: KeyboardEvent<HTMLInputElement>) {
+        const fieldName = e.currentTarget.name; 
+        const fieldValue = e.currentTarget.value;
+        if(e.key === 'Enter') {
+            if(fieldName == 'knowledge') {
+                setArrayKnowledge(() => [...arrayKnowledge, fieldValue])
+                e.currentTarget.value = '';
+            } else if(fieldName == 'interest') {
+                setArrayInterest(() => [...arrayInterest, fieldValue ])
+                e.currentTarget.value = '';
+            }
+        } 
+    }
     function handleSubmitRegistrationForm(e:FormEvent) {
         e.preventDefault()
         console.log(formData)
     }  
-    function handleFieldArraysForm(e: KeyboardEvent<HTMLInputElement>) {
-       const fieldName = e.currentTarget.name; 
-       const fieldValue = e.currentTarget.value;
-       if(e.key === 'Enter') {
-            if(fieldName === 'knowledge') {
-                const arrayKnowledge:string[] = formData.knowledge;
-                arrayKnowledge.push(fieldValue)
-                setDataForm(() => {
-                    return {
-                        ...formData,
-                        [fieldName]: arrayKnowledge
-                    }
-                })
-                e.currentTarget.value = ''
-            } else if (fieldName === 'interest') {
-                const arrayInterest:string[] = formData.interest;
-                arrayInterest.push(fieldValue)
-                setDataForm(() => {
-                    return {
-                        ...formData,
-                        [fieldName]: arrayInterest
-                    }
-                })
-                e.currentTarget.value = ''
-            }
-       } 
-    } 
     return(
         <div className="registrationContainer">
             <h1>Cadastre-se</h1>
-            <form className='registrationContainer_registrationForm' onSubmit={(e) => handleSubmitRegistrationForm(e)}>
+            <form className='registrationContainer_registrationForm'>
                 <fieldset>
                     <legend>Informações Pessoais</legend>
                     <div>
@@ -156,17 +141,18 @@ export default function Registration() {
                         <input type="text" name="knowledge" id="knowledge" placeholder='Informe os assuntos que você domina' onKeyDown={(e) => handleFieldArraysForm(e)}/>
                     </div>
                     <div className='displayArray knowledge'>
-                        {formData.knowledge.map( (knowledge,index) => <Flag key={index}>{knowledge} <AiOutlineCloseCircle/></Flag>)}
+                    {arrayKnowledge && arrayKnowledge.map( (knowledge,index) => <Flag key={index} content={knowledge} state={[arrayKnowledge, setArrayKnowledge]}/>)}
                     </div>
                     <div>
                         <label htmlFor="interest">Interesses</label>
                         <input type="text" name="interest" id="interest" placeholder='Informe as áreas de interesse' onKeyDown={(e) => handleFieldArraysForm(e)}/>
                     </div>
                     <div className='displayArray interest'>
-                        {formData.interest.map( (interest,index) => <Flag key={index}>{interest} <AiOutlineCloseCircle/></Flag>)}
+                        {arrayInterest && arrayInterest.map( (interest,index) => <Flag key={index} content={interest} state={[arrayInterest, setArrayInterest]}/>)}
+                        
                     </div>
                 </fieldset>
-                <Button content='Cadastrar'/> 
+                <button type='submit' onClick={(e) => handleSubmitRegistrationForm(e)} >Cadastrar</button>
             </form>      
         </div>
     )
