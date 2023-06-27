@@ -27,5 +27,76 @@
                 color: variables.$color-secondary;
             }
         }
+        .loged {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+
+            & > h6 {
+                font-size: 1rem;
+            }
+            .menuHamburguer {
+                position: relative;
+                width: 40px;
+                height: 30px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                cursor: pointer;
+                scale: .75;
+                & > span {
+                    display: block;
+                    width: 100%;
+                    height: 15%;
+                    background-color: variables.$color-primary;
+                    border-radius: 4px;
+                    transition: all 0.3s linear;
+
+                }
+                & > .piece1 {
+                    position: absolute;
+                    top: 50%;
+                    rotate: 45deg;
+                }
+                & > .piece2 {
+                    width: 0;
+                }
+                & > .piece3 {
+                    position: absolute;
+                    top: 50%;
+                    rotate: -45deg;
+                }
+            }
+            .navbar {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 4rem;
+                right: -13rem;
+                background-color: #111;
+                transition: all .3s linear;
+                width: 200px;
+
+                & > * {
+                    padding: 1rem;
+                    text-align: center;
+                }
+                & > h6 {
+                    color: variables.$color-secondary;
+                    font-size: 1rem;
+                    background-color: #aaa;
+                }
+                & > span{
+                    display: block;
+                    cursor: pointer;
+                    &:hover{
+                        background-color: #555;
+                    }
+                }
+            }
+            .menuOpen {
+                right: 0;
+            }
+        }
     }
 }

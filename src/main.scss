@@ -10,6 +10,7 @@ body {
     height: 100Vh;
     background-color: variables.$color_bg;
     font-family: variables.$font-family-default;
+    overflow-x: hidden;
 }
 .container {
     width: 80%;

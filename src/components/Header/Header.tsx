@@ -1,12 +1,13 @@
 
 import { RiAccountCircleLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import './Header.scss';
 
 export default function Header() {
   const { user, setUser } = useContext(AuthContext);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('conectaAlunosUser');
@@ -17,6 +18,10 @@ export default function Header() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  function handleOpenAndCloseMenu() {
+    setOpen(current => !current)
+  }
+
   return (
     <header className='header'>
       <div className="container">
@@ -25,10 +30,30 @@ export default function Header() {
             <h1>LOGO</h1>
           </Link>
         </div>
-        <Link to={'/login'} className='header_loginSection'>
-          <h6>{typeof user === 'string' ? user : 'Fazer login'}</h6>
+        {user == null ?
+        (<Link to={'/login'} className='header_loginSection'>
+          <h6>Fazer login</h6>
           <RiAccountCircleLine />
-        </Link>
+        </Link>)
+        :
+        (<div className='loged'>
+          <h6>{user}</h6>
+          <div className='menuHamburguer' onClick={handleOpenAndCloseMenu}>
+            <span className={open && 'piece1'}></span>
+            <span className={open && 'piece2'}></span>
+            <span className={open && 'piece3'}></span>
+          </div> 
+          <div className={open ? 'navbar menuOpen' : 'navbar'}>        
+            <span>Sair</span>
+            <span>Sair</span>
+            <span>Sair</span>
+            <span>Sair</span>
+            <span>Sair</span>
+            <span>Sair</span>
+          </div>
+        </div>)
+        }
+        
       </div>
     </header>
   );
