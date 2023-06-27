@@ -5,13 +5,13 @@ interface IUser {
 }
 
 interface IAuthContext {
-    user: IUser;
+    user?: IUser | null;
     setUser: (user: IUser) => string | null | void;
 }
 export const AuthContext = createContext<IAuthContext>(null!)
 
 export default function AuthProvider ({children}:{children: JSX.Element}) {
-    const [user, setUser] = useState<IUser>(null!); 
+    const [user, setUser] = useState<IUser | null>(null!); 
 
     return (
         <AuthContext.Provider value={{user, setUser}}>

@@ -1,13 +1,15 @@
 
 import { RiAccountCircleLine } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useEffect, useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import './Header.scss';
+import { BiLogOut } from 'react-icons/bi';
 
 export default function Header() {
   const { user, setUser } = useContext(AuthContext);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedUser = localStorage.getItem('conectaAlunosUser');
@@ -20,6 +22,13 @@ export default function Header() {
 
   function handleOpenAndCloseMenu() {
     setOpen(current => !current)
+  }
+  
+  function logout() {
+    localStorage.removeItem('conectaAlunosUser')
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    setUser(null!)
+    navigate('/')
   }
 
   return (
@@ -37,11 +46,11 @@ export default function Header() {
         </Link>)
         :
         (<div className='loged'>
-          <h6>{user}</h6>
+          <h6>{String(user)}</h6>
           <div className='menuHamburguer' onClick={handleOpenAndCloseMenu}>
-            <span className={open && 'piece1'}></span>
-            <span className={open && 'piece2'}></span>
-            <span className={open && 'piece3'}></span>
+            <span className={open ? 'piece1' : ''}></span>
+            <span className={open ? 'piece2' : ''}></span>
+            <span className={open ? 'piece3' : ''}></span>
           </div> 
           <div className={open ? 'navbar menuOpen' : 'navbar'}>        
             <span>Sair</span>
@@ -49,7 +58,10 @@ export default function Header() {
             <span>Sair</span>
             <span>Sair</span>
             <span>Sair</span>
-            <span>Sair</span>
+            <span onClick={logout}>
+              <p>Sair</p>
+              <BiLogOut/>
+            </span>
           </div>
         </div>)
         }
