@@ -25,7 +25,7 @@ export default function StudentCard(props: IStudent) {
               </div>
               <div>
                 <h6>Pode mentorar?</h6>
-                <p>{props.obj.isAvaliable ? 'Sim' : 'Não'}</p>
+                <p>{props.obj.isAvailable ? 'Sim' : 'Não'}</p>
               </div>
               <MdOutlineKeyboardArrowDown className={show == false ? '': 'rotate'} onClick={() => handleShow()}/>
             </div>
@@ -101,10 +101,12 @@ export default function StudentCard(props: IStudent) {
                 </a>
               </div>
               <div className='lastSection_addMentor'>
-                <div>
+                {props.obj.isAvailable && 
+                  <div>
                     <AiOutlinePlusCircle/>
                     <p>Adicionar como mentor</p>
                 </div>
+                }
               </div>
             </div>
           </div>
