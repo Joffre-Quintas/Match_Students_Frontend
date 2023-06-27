@@ -95,6 +95,7 @@
                     gap: .5rem;
                     cursor: pointer;
                     transition: all .3s linear;
+                    
                     &:hover {
                         color: variables.$color-secondary;
                     }

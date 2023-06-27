@@ -32,8 +32,8 @@
                 flex-direction: column;
                 gap: 0.5rem;
                 
-                & > label {
-
+                &  label {
+                    cursor: pointer;
                     color: variables.$color-primary;
                 }
                 & > input {
@@ -44,12 +44,33 @@
                 & > select {
                     width: 50px;
                 }
+                & > div {
+                    display: flex;
+                    align-items: center;
+
+                    & > svg:first-child {
+                        color: variables.$color-primary;
+                        font-size: 3rem;
+                        cursor: pointer;
+                        transition: all .3s linear;
+                        &:hover{
+                            color: variables.$color-secondary;
+                        }
+                    }
+                    & > input {
+                        padding: .5rem 1rem;
+                        color: #333;
+                        outline: none;
+                        width: 100%;
+                    }
+                }
             }
             & > .displayArray {
                 flex-direction: row;
                 flex-wrap: wrap;
             }
             & > .divInputRadio {
+                
                 & > div {
                     display: flex;
                     justify-content: space-evenly;
