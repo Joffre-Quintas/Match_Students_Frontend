@@ -4,6 +4,7 @@ import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 import PrivateRoute from '../middlewares/PrivateRoute';
 import Registration from '../pages/Registration/Registration';
+import RegistrationOk from '../pages/RegistrationOk/RegistrationOk';
 
 
 export default function AppRoutes() {
@@ -13,6 +14,7 @@ export default function AppRoutes() {
             <Route path="/" element={<InitialPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/registration" element={<Registration />} />
+            <Route path="/registration/registrationok" element={<RegistrationOk />} />
             <Route path="/home" element={<PrivateRoute><Home/></PrivateRoute>} />
             
         </Routes>

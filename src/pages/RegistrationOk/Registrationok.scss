@@ -1,0 +1,15 @@
+@use '../../variables';
+
+.registrationOk {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+
+    & > svg {
+        margin-top: 4rem;
+        color: variables.$color-secondary;
+        font-size: 10rem;
+    }
+}

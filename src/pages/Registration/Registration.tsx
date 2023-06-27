@@ -1,14 +1,16 @@
-import { ChangeEvent, KeyboardEvent, useState, FormEvent } from 'react';
+import { ChangeEvent,useState, FormEvent } from 'react';
 import './Registration.scss';
 import Flag from '../../components/Flag/Flag';
 import { URL } from '../../utils/URL';
 import { AiOutlinePlusSquare } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 
 export default function Registration() {
     const [arrayKnowledge, setArrayKnowledge] = useState<string[]>([])
     const [arrayInterest, setArrayInterest] = useState<string[]>([])
     const [fieldKnowledge, setFieldKnowledge] = useState('')
     const [fieldInterest, setFieldInterest] = useState('')
+    const navigate = useNavigate()
 
     const [formData, setDataForm] = useState({knowledge: [] as string[], interest: [] as string[]});
     function handleInputTextChange(e: ChangeEvent<HTMLInputElement>) {
@@ -47,7 +49,7 @@ export default function Registration() {
                     "Content-type": "application/json"
                 },
                 body: JSON.stringify(formData)
-            }).then(() => console.log('ok'))            
+            }).then(() => navigate('./registrationok)'))           
         } catch (error) {
             console.log(error)
         }
