@@ -1,4 +1,5 @@
 export default interface IStudent {
+    [x: string]: any;
     _id?: string;
     completeName: string;
     registrationNumber: string;

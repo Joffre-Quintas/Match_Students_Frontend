@@ -1,7 +1,7 @@
 import { ChangeEvent, KeyboardEvent, useState, FormEvent } from 'react';
 import './Registration.scss';
 import Flag from '../../components/Flag/Flag';
-
+import { URL } from '../../utils/URL';
 
 export default function Registration() {
     const [arrayKnowledge, setArrayKnowledge] = useState<string[]>([])
@@ -42,7 +42,24 @@ export default function Registration() {
     }
     function handleSubmitRegistrationForm(e:FormEvent) {
         e.preventDefault()
-        console.log(formData)
+        setDataForm(() => {
+            return {
+                ...formData,
+                interest: arrayInterest,
+                knowledge: arrayKnowledge
+            }
+        })
+        try {
+            fetch(`${URL}/registration`, {
+                method: 'POST',
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            }).then(() => console.log('ok'))            
+        } catch (error) {
+            console.log(error)
+        }
     }  
     return(
         <div className="registrationContainer">
@@ -82,8 +99,8 @@ export default function Registration() {
                 <fieldset>
                     <legend>Informações acadêmicas</legend>
                     <div>
-                        <label htmlFor="cra">CRA</label>
-                        <input type="text" name='cra' id='cra' onChange={(e) => handleInputTextChange(e)}/>
+                        <label htmlFor="registrationNumber">Matrícula</label>
+                        <input type="text" name='registrationNumber' id='registrationNumber' onChange={(e) => handleInputTextChange(e)}/>
                     </div>
                     <div>
                         <label htmlFor="course">Curso</label>
@@ -141,18 +158,17 @@ export default function Registration() {
                         <input type="text" name="knowledge" id="knowledge" placeholder='Informe os assuntos que você domina' onKeyDown={(e) => handleFieldArraysForm(e)}/>
                     </div>
                     <div className='displayArray knowledge'>
-                    {arrayKnowledge && arrayKnowledge.map( (knowledge,index) => <Flag key={index} content={knowledge} state={[arrayKnowledge, setArrayKnowledge]}/>)}
+                        {arrayKnowledge && arrayKnowledge.map( (knowledge,index) => <Flag key={index} content={knowledge} state={[arrayKnowledge, setArrayKnowledge]}/>)}
                     </div>
                     <div>
                         <label htmlFor="interest">Interesses</label>
                         <input type="text" name="interest" id="interest" placeholder='Informe as áreas de interesse' onKeyDown={(e) => handleFieldArraysForm(e)}/>
                     </div>
                     <div className='displayArray interest'>
-                        {arrayInterest && arrayInterest.map( (interest,index) => <Flag key={index} content={interest} state={[arrayInterest, setArrayInterest]}/>)}
-                        
+                        {arrayInterest && arrayInterest.map( (interest,index) => <Flag key={index} content={interest} state={[arrayInterest, setArrayInterest]}/>)}        
                     </div>
                 </fieldset>
-                <button type='submit' onClick={(e) => handleSubmitRegistrationForm(e)} >Cadastrar</button>
+                <button onClick={(e) => handleSubmitRegistrationForm(e)}>Cadastrar</button>
             </form>      
         </div>
     )
