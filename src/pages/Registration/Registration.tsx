@@ -5,6 +5,8 @@ import { URL } from '../../utils/URL';
 import { AiOutlinePlusSquare } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { validationInput, validationSubmit } from '../../utils/validations';
+
+//Type
 import IStudent from '../../types/IStudents';
 
 export default function Registration() {
@@ -12,6 +14,7 @@ export default function Registration() {
     const [arrayInterest, setArrayInterest] = useState<string[]>([])
     const [fieldKnowledge, setFieldKnowledge] = useState('')
     const [fieldInterest, setFieldInterest] = useState('')
+    
     const navigate = useNavigate()
 
     const [dataForm, setDataForm] = useState<IStudent>({
@@ -75,6 +78,7 @@ export default function Registration() {
         
     }  
     return(
+        
         <div className="registrationContainer">
             <h1>Cadastre-se</h1>
             <form className='registrationContainer_registrationForm'>
@@ -89,7 +93,7 @@ export default function Registration() {
                             placeholder="Digite seu nome completo" 
                             onChange={(e) => handleInputTextChange(e)}
                             onBlur={(e) => validationInput('text',e)} 
-                        />
+                            />
                     </div>
                     <div>
                         <label htmlFor="email">E-mail</label>
@@ -99,7 +103,7 @@ export default function Registration() {
                             placeholder="exemplo@email.com.br" 
                             onChange={(e) => handleInputTextChange(e)}
                             onBlur={(e) => validationInput('email',e)} 
-                        />
+                            />
                     </div>
                     <div>
                         <label htmlFor="reemail">Confirme seu E-mail</label>
@@ -114,7 +118,7 @@ export default function Registration() {
                                     return "Os campos não conferem."
                                 }
                             }}
-                        />
+                            />
                     </div>
                     <div>
                         <label htmlFor="birthday">Data de nascimento</label>
@@ -124,7 +128,7 @@ export default function Registration() {
                             id="birthday" 
                             onChange={(e) => handleInputTextChange(e)}
                             onBlur={(e) => validationInput("date",e)}
-                        />
+                            />
                     </div>
                     <div>
                         <label htmlFor="phone">Telefone</label>
@@ -135,7 +139,7 @@ export default function Registration() {
                             placeholder="Informe o número com DDD" 
                             onChange={(e) => handleInputTextChange(e)}
                             onBlur={(e) => validationInput('phone',e)}
-                        />
+                            />
                     </div>
                     <div>
                         <label htmlFor="password">Senha</label>
@@ -146,7 +150,7 @@ export default function Registration() {
                             placeholder="Digite sua senha" 
                             onChange={(e) => handleInputTextChange(e)}
                             onBlur={(e) => validationInput("password", e)}
-                        />
+                            />
                     </div>
                     <div>
                         <label htmlFor="repassword">Confirme a Senha</label>
@@ -161,7 +165,7 @@ export default function Registration() {
                                     return "Os campos não conferem."
                                 }
                             }}
-                        />
+                            />
                     </div>
                 </fieldset>
                 <fieldset>
@@ -173,7 +177,7 @@ export default function Registration() {
                             name='registrationNumber' 
                             id='registrationNumber' onChange={(e) => handleInputTextChange(e)}
                             onBlur={(e) => validationInput("RN", e)}
-                        />
+                            />
                     </div>
                     <div>
                         <label htmlFor="course">Curso</label>
