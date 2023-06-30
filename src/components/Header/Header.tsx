@@ -33,7 +33,7 @@ export default function Header() {
     setOpen(false)
     navigate('/')
   }
-
+  
   return (
     <header className='header'>
       <div className="container">
@@ -62,8 +62,13 @@ export default function Header() {
               <RxUpdate/>
             </span>
             <span>
-              <p>Report Bug</p>
-              <FiAlertTriangle/>
+              <Link 
+                to='https://api.whatsapp.com/send?phone=5581997792028&text=Olá,%20estou%20utilizando%20a%20plataforma%20Conecta%20aluno%20e%20estou%20aqui%20para%20reportar%20um%20bug.' 
+                target='_blank'
+              >
+                <p>Report Bug</p>
+                <FiAlertTriangle/>
+              </Link>
             </span>
             <span onClick={logout}>
               <p>Sair</p>

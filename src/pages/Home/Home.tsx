@@ -9,6 +9,9 @@ export default function Home() {
     const [student, setStudent] = useState([]);
 
     useEffect(() => {
+        window.scrollTo({
+            top:0
+        })
         async function loadData() {
             const data = await fetch(`${URL}/home`);
             const dataConverted = await data.json();

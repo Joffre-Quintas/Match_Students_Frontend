@@ -1,10 +1,10 @@
-import { ChangeEvent,useState, FormEvent } from 'react';
+import { ChangeEvent,useState, FormEvent, useEffect } from 'react';
 import './Registration.scss';
 import Flag from '../../components/Flag/Flag';
 import { URL } from '../../utils/URL';
 import { AiOutlinePlusSquare } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import { validationInput, validationSubmit } from '../../utils/validations';
+import { createMsgError, removeMsgError, validationInput, validationSubmit } from '../../utils/validations';
 
 //Type
 import IStudent from '../../types/IStudents';
@@ -14,15 +14,18 @@ export default function Registration() {
     const [arrayInterest, setArrayInterest] = useState<string[]>([])
     const [fieldKnowledge, setFieldKnowledge] = useState('')
     const [fieldInterest, setFieldInterest] = useState('')
-    
     const navigate = useNavigate()
-
+    useEffect(() => {
+        window.scrollTo({
+            top: 0
+        })
+    },[])
     const [dataForm, setDataForm] = useState<IStudent>({
         completeName: '',
         registrationNumber: '',
         birthday: '',
         phone: '',
-        period: '',
+        period: 0,
         course: '',
         turn: '',
         isAvailable: true,
@@ -51,7 +54,7 @@ export default function Registration() {
             }
         })
     }
-    function handleSubmitRegistrationForm(e:FormEvent) {
+    async function handleSubmitRegistrationForm(e:FormEvent) {
         e.preventDefault()
         setDataForm(current => {
             return {
@@ -62,18 +65,25 @@ export default function Registration() {
         })
         if(validationSubmit(dataForm)) {
             try {
-                fetch(`${URL}/registration`, {
+                const response = await fetch(`${URL}/registration`, {
                     method: 'POST',
                     headers: {
                         "Content-type": "application/json"
                     },
                     body: JSON.stringify(dataForm)
                 })
-                .then(() => navigate('./registrationok'))
-                .catch(err => console.log(err))
+                if(response.status == 422) {
+                    alert('Já existe um cadastro com o mesmo E-mail, Telefone ou Matrícula. Verifique seus dados e tente novamente.')
+                    return;
+                }else if(!response.ok) {
+                    alert('Ocorreu um erro de servidor, por favor aguarde um pouco e tente novamente mais tarde!')
+                    return;
+                }
             } catch (error) {
                 console.log(error)
+                return
             }
+            navigate('./registrationok')
         }
         
     }  
@@ -103,21 +113,6 @@ export default function Registration() {
                             placeholder="exemplo@email.com.br" 
                             onChange={(e) => handleInputTextChange(e)}
                             onBlur={(e) => validationInput('email',e)} 
-                            />
-                    </div>
-                    <div>
-                        <label htmlFor="reemail">Confirme seu E-mail</label>
-                        <input 
-                            type="email" 
-                            id="reemail" 
-                            placeholder="Este será seu login"
-                            onBlur={(e) => {
-                                const fieldValue = e.target.value;
-                                if(fieldValue != dataForm.email) {
-                                    console.log("Os campos não conferem")
-                                    return "Os campos não conferem."
-                                }
-                            }}
                             />
                     </div>
                     <div>
@@ -160,10 +155,7 @@ export default function Registration() {
                             placeholder="Digite sua senha" 
                             onBlur={(e) => {
                                 const fieldValue = e.target.value;
-                                if(fieldValue != dataForm.password) {
-                                    console.log("Os campos não conferem")
-                                    return "Os campos não conferem."
-                                }
+                                fieldValue != dataForm.password ? createMsgError(e, 'Os campos não conferem') : removeMsgError(e)   
                             }}
                             />
                     </div>

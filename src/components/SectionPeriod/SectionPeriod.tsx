@@ -4,7 +4,7 @@ import './SectionPeriod.scss';
 import IStudent from '../../types/IStudents';
 import StudentCard from './StudentCard/StudentCard';
 
-export default function SectionPeriod(props:IStudent) {
+export default function SectionPeriod(props) {
 
   return (
     <section className='period'>

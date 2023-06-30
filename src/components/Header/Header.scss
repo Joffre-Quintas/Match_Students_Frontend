@@ -98,6 +98,16 @@
                         font-size: 1.3rem;
                         color: variables.$color-primary;
                     }
+                    & > a {
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+                        
+                        & > svg {
+                        font-size: 1.3rem;
+                        color: variables.$color-primary;
+                    }
+                    }
                 }
             }
             .menuOpen {

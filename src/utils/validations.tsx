@@ -1,7 +1,7 @@
 import IStudent from '../types/IStudents';
 import { regex } from './regex';
 
-function removeMsgError(e: React.FocusEvent<HTMLInputElement>) {
+export function removeMsgError(e: React.FocusEvent<HTMLInputElement>) {
     const parentElement = e.target.parentElement;
     const lastChild = parentElement?.lastChild;
 
@@ -12,7 +12,7 @@ function removeMsgError(e: React.FocusEvent<HTMLInputElement>) {
     e.target.style.border = 'none';
 }
 
-function createMsgError(e: React.FocusEvent<HTMLInputElement>, msg: string) {
+export function createMsgError(e: React.FocusEvent<HTMLInputElement>, msg: string) {
     const parentElement = e.target.parentElement;
     const lastChild = parentElement?.lastChild;
 
@@ -73,14 +73,14 @@ export function validationInput(type:string , e:React.FocusEvent<HTMLInputElemen
             break;
         case 'phone':
             removeMsgError(e)
-            if(regex.phone.test(fieldValue)) {
+            if(!(regex.phone.test(fieldValue))) {
                 createMsgError(e,'O valor informado deve conter apenas números e o DDD sem o zero.')
                 return 
             }
             break;
         case 'RN':
             removeMsgError(e)
-            if(regex.RN.test(fieldValue)) {
+            if(!(regex.RN.test(fieldValue))) {
                 createMsgError(e,'Deve conter 8 Números.')
                 return 
             }    
@@ -93,10 +93,35 @@ export function validationSubmit(obj:IStudent) {
         alert('Preencha todos os campos!')
         return false
     }
+    if(!(regex.text.test(completeName)) || completeName.length < 8) {
+        alert('Preencha todos os campos corretamente!')
+        return false
+    }
+    if(!(regex.email.test(email))) {
+        alert('Preencha todos os campos corretamente!')
+        return false
+    }
+    if(password.length < 5) {
+        alert('Preencha todos os campos corretamente!')
+        return false
+    }
+    if(!(regex.phone.test(phone))) {
+        alert('Preencha todos os campos corretamente!')
+        return false
+    }
+    if(period < 1 || period > 8) {
+        alert('Preencha todos os campos corretamente!')
+        return false
+    }
+    if(course != 'SI') {
+        alert('Preencha todos os campos corretamente!')
+        return false
+    }
+    if(!(turn == 'Manhã' || turn== 'Tarde' || turn == 'Noite')) {
+        alert('Preencha todos os campos corretamente!')
+        return false
+    }
     return true;
 }
-
-
-
 
 

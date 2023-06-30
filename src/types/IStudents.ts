@@ -5,7 +5,7 @@ export default interface IStudent {
     registrationNumber: string;
     birthday: string;
     phone: string;
-    period: string;
+    period: number;
     turn: string;
     course: string;
     knowledge: string[];
