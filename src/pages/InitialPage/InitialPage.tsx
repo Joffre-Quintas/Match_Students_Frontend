@@ -68,7 +68,7 @@ export default function InitialPage(){
                     <div className="textField">
                         <h2>Já Possui Cadastro?</h2>
                         <p>Seja bem vindo novamente!</p>
-                        <Link to={'/home'}><Button content='Prossiga >'/></Link>
+                        <Link to={'/home'}><Button content='Prossiga'/></Link>
                     </div>
                 </div>
             </section> 

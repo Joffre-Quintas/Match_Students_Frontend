@@ -4,6 +4,8 @@ import Flag from '../../components/Flag/Flag';
 import { URL } from '../../utils/URL';
 import { AiOutlinePlusSquare } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
+import { validationInput, validationSubmit } from '../../utils/validations';
+import IStudent from '../../types/IStudents';
 
 export default function Registration() {
     const [arrayKnowledge, setArrayKnowledge] = useState<string[]>([])
@@ -12,13 +14,26 @@ export default function Registration() {
     const [fieldInterest, setFieldInterest] = useState('')
     const navigate = useNavigate()
 
-    const [formData, setDataForm] = useState({knowledge: [] as string[], interest: [] as string[]});
+    const [dataForm, setDataForm] = useState<IStudent>({
+        completeName: '',
+        registrationNumber: '',
+        birthday: '',
+        phone: '',
+        period: '',
+        course: '',
+        turn: '',
+        isAvailable: true,
+        email: '',
+        password:'',
+        knowledge: [] as string[],
+        interest: [] as string[]});
+
     function handleInputTextChange(e: ChangeEvent<HTMLInputElement>) {
         const fieldValue = e.target.value;
         const fieldName = e.target.name;
-        setDataForm(() => {
+        setDataForm(current => {
             return {
-                ...formData,
+                ...current,
                 [fieldName]: fieldValue
             }
         })
@@ -26,33 +41,38 @@ export default function Registration() {
     function handleInputSelectChange(e:ChangeEvent<HTMLSelectElement>) {
         const fieldValue = e.target.value;
         const fieldName = e.target.name;
-        setDataForm(() => {
+        setDataForm(current => {
             return {
-                ...formData,
+                ...current,
                 [fieldName]: fieldValue
             }
         })
     }
     function handleSubmitRegistrationForm(e:FormEvent) {
         e.preventDefault()
-        setDataForm(() => {
+        setDataForm(current => {
             return {
-                ...formData,
+                ...current,
                 interest: arrayInterest,
                 knowledge: arrayKnowledge
             }
         })
-        try {
-            fetch(`${URL}/registration`, {
-                method: 'POST',
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify(formData)
-            }).then(() => navigate('./registrationok)'))           
-        } catch (error) {
-            console.log(error)
+        if(validationSubmit(dataForm)) {
+            try {
+                fetch(`${URL}/registration`, {
+                    method: 'POST',
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify(dataForm)
+                })
+                .then(() => navigate('./registrationok'))
+                .catch(err => console.log(err))
+            } catch (error) {
+                console.log(error)
+            }
         }
+        
     }  
     return(
         <div className="registrationContainer">
@@ -62,38 +82,98 @@ export default function Registration() {
                     <legend>Informações Pessoais</legend>
                     <div>
                         <label htmlFor="completeName">Nome Completo</label>
-                        <input type="text" name='completeName' id="completeName" placeholder="Digite seu nome completo" onChange={(e) => handleInputTextChange(e)} />
+                        <input 
+                            type="text"
+                            name='completeName' 
+                            id="completeName" 
+                            placeholder="Digite seu nome completo" 
+                            onChange={(e) => handleInputTextChange(e)}
+                            onBlur={(e) => validationInput('text',e)} 
+                        />
                     </div>
                     <div>
                         <label htmlFor="email">E-mail</label>
-                        <input type="email" name='email' id="email" placeholder="exemplo@email.com.br" onChange={(e) => handleInputTextChange(e)} />
+                        <input 
+                            type="email" 
+                            name='email' id="email" 
+                            placeholder="exemplo@email.com.br" 
+                            onChange={(e) => handleInputTextChange(e)}
+                            onBlur={(e) => validationInput('email',e)} 
+                        />
                     </div>
                     <div>
                         <label htmlFor="reemail">Confirme seu E-mail</label>
-                        <input type="email" id="reemail" placeholder="Este será seu login" />
+                        <input 
+                            type="email" 
+                            id="reemail" 
+                            placeholder="Este será seu login"
+                            onBlur={(e) => {
+                                const fieldValue = e.target.value;
+                                if(fieldValue != dataForm.email) {
+                                    console.log("Os campos não conferem")
+                                    return "Os campos não conferem."
+                                }
+                            }}
+                        />
                     </div>
                     <div>
                         <label htmlFor="birthday">Data de nascimento</label>
-                        <input type="date" name='birthday' id="birthday" onChange={(e) => handleInputTextChange(e)}/>
+                        <input 
+                            type="date" 
+                            name='birthday' 
+                            id="birthday" 
+                            onChange={(e) => handleInputTextChange(e)}
+                            onBlur={(e) => validationInput("date",e)}
+                        />
                     </div>
                     <div>
                         <label htmlFor="phone">Telefone</label>
-                        <input type="tel" name='phone' id="phone" placeholder="Informe o número com DDD" onChange={(e) => handleInputTextChange(e)}/>
+                        <input 
+                            type="tel" 
+                            name='phone' 
+                            id="phone" 
+                            placeholder="Informe o número com DDD" 
+                            onChange={(e) => handleInputTextChange(e)}
+                            onBlur={(e) => validationInput('phone',e)}
+                        />
                     </div>
                     <div>
                         <label htmlFor="password">Senha</label>
-                        <input type="password" name='password' id="password" placeholder="Digite sua senha" onChange={(e) => handleInputTextChange(e)}/>
+                        <input 
+                            type="password" 
+                            name='password' 
+                            id="password" 
+                            placeholder="Digite sua senha" 
+                            onChange={(e) => handleInputTextChange(e)}
+                            onBlur={(e) => validationInput("password", e)}
+                        />
                     </div>
                     <div>
                         <label htmlFor="repassword">Confirme a Senha</label>
-                        <input type="password" id="repassword" placeholder="Digite sua senha" />
+                        <input 
+                            type="password" 
+                            id="repassword" 
+                            placeholder="Digite sua senha" 
+                            onBlur={(e) => {
+                                const fieldValue = e.target.value;
+                                if(fieldValue != dataForm.password) {
+                                    console.log("Os campos não conferem")
+                                    return "Os campos não conferem."
+                                }
+                            }}
+                        />
                     </div>
                 </fieldset>
                 <fieldset>
                     <legend>Informações acadêmicas</legend>
                     <div>
                         <label htmlFor="registrationNumber">Matrícula</label>
-                        <input type="text" name='registrationNumber' id='registrationNumber' onChange={(e) => handleInputTextChange(e)}/>
+                        <input 
+                            type="text" 
+                            name='registrationNumber' 
+                            id='registrationNumber' onChange={(e) => handleInputTextChange(e)}
+                            onBlur={(e) => validationInput("RN", e)}
+                        />
                     </div>
                     <div>
                         <label htmlFor="course">Curso</label>

@@ -5,6 +5,8 @@ import { useEffect, useContext, useState } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import './Header.scss';
 import { BiLogOut } from 'react-icons/bi';
+import { RxUpdate } from 'react-icons/rx';
+import { FiAlertTriangle } from 'react-icons/fi';
 
 export default function Header() {
   const { user, setUser } = useContext(AuthContext);
@@ -23,11 +25,12 @@ export default function Header() {
   function handleOpenAndCloseMenu() {
     setOpen(current => !current)
   }
-  
+
   function logout() {
     localStorage.removeItem('conectaAlunosUser')
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     setUser(null!)
+    setOpen(false)
     navigate('/')
   }
 
@@ -52,12 +55,16 @@ export default function Header() {
             <span className={open ? 'piece2' : ''}></span>
             <span className={open ? 'piece3' : ''}></span>
           </div> 
-          <div className={open ? 'navbar menuOpen' : 'navbar'}>        
-            <span>Sair</span>
-            <span>Sair</span>
-            <span>Sair</span>
-            <span>Sair</span>
-            <span>Sair</span>
+          <div className={open ? 'navbar menuOpen' : 'navbar'}>  
+                  
+            <span>
+              <p>Atualizar Cadastro</p>
+              <RxUpdate/>
+            </span>
+            <span>
+              <p>Report Bug</p>
+              <FiAlertTriangle/>
+            </span>
             <span onClick={logout}>
               <p>Sair</p>
               <BiLogOut/>

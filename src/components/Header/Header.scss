@@ -72,10 +72,10 @@
                 flex-direction: column;
                 position: absolute;
                 top: 4rem;
-                right: -13rem;
+                right: -230px;
                 background-color: #11111196;
                 transition: all .3s linear;
-                width: 200px;
+                width: 230px;
                 
                 & > * {
                     padding: 1rem;
@@ -96,6 +96,7 @@
                     }
                     & > svg {
                         font-size: 1.3rem;
+                        color: variables.$color-primary;
                     }
                 }
             }
