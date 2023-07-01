@@ -1,10 +1,11 @@
-import { ChangeEvent,useState, FormEvent, useEffect } from 'react';
+import { ChangeEvent,useState, FormEvent, useEffect, useContext } from 'react';
 import './Registration.scss';
 import Flag from '../../components/Flag/Flag';
 import { URL } from '../../utils/URL';
 import { AiOutlinePlusSquare } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { createMsgError, removeMsgError, validationInput, validationSubmit } from '../../utils/validations';
+import { StudentContext } from '../../context/StudentsContext';
 
 //Type
 import IStudent from '../../types/IStudents';
@@ -14,6 +15,8 @@ export default function Registration() {
     const [arrayInterest, setArrayInterest] = useState<string[]>([])
     const [fieldKnowledge, setFieldKnowledge] = useState('')
     const [fieldInterest, setFieldInterest] = useState('')
+    const { setListStudents } = useContext(StudentContext);
+
     const navigate = useNavigate()
     useEffect(() => {
         window.scrollTo({
@@ -54,6 +57,7 @@ export default function Registration() {
             }
         })
     }
+    
     async function handleSubmitRegistrationForm(e:FormEvent) {
         e.preventDefault()
         setDataForm(current => {
@@ -75,7 +79,13 @@ export default function Registration() {
                 if(response.status == 422) {
                     alert('Já existe um cadastro com o mesmo E-mail, Telefone ou Matrícula. Verifique seus dados e tente novamente.')
                     return;
-                }else if(!response.ok) {
+                } else if (!response.ok) {
+                    setListStudents(current => {
+                        return{
+                            ...current,
+                            dataForm
+                        }
+                    })
                     alert('Ocorreu um erro de servidor, por favor aguarde um pouco e tente novamente mais tarde!')
                     return;
                 }
