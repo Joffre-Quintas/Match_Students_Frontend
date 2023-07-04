@@ -89,7 +89,7 @@ export function validationInput(type:string , e:React.FocusEvent<HTMLInputElemen
 export function validationSubmit(obj:IStudent) {
     const { completeName, registrationNumber, birthday, phone, period, course, turn, email, password } =  obj;
 
-    if(!completeName.trim() || !registrationNumber.trim() || !birthday || !phone.trim() || !period || !course || !turn || !email.trim() || !password.trim()) {
+    if(!completeName || !registrationNumber || !birthday || !phone || !period || !course || !turn || !email || !password) {
         alert('Preencha todos os campos!')
         return false
     }

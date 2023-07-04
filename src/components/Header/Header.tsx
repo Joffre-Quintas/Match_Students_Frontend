@@ -17,11 +17,10 @@ export default function Header() {
     const storedUser = localStorage.getItem('conectaAlunosUser');
     if (storedUser) {
         const dataUserLogged = JSON.parse(storedUser);
-        setUser(dataUserLogged.completeName); 
+        setUser(dataUserLogged); 
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   function handleOpenAndCloseMenu() {
     setOpen(current => !current)
   }
@@ -49,7 +48,7 @@ export default function Header() {
         </Link>)
         :
         (<div className='loged'>
-          <h6>{String(user)}</h6>
+          <h6>{user && user.completeName}</h6>
           <div className='menuHamburguer' onClick={handleOpenAndCloseMenu}>
             <span className={open ? 'piece1' : ''}></span>
             <span className={open ? 'piece2' : ''}></span>
@@ -57,11 +56,13 @@ export default function Header() {
           </div> 
           <div className={open ? 'navbar menuOpen' : 'navbar'}>  
                   
-            <span>
-              <p>Atualizar Cadastro</p>
-              <RxUpdate/>
+            <span onClick={handleOpenAndCloseMenu}>
+              <Link to={`registration/update/${user.token}`}>
+                <p>Atualizar Cadastro</p>
+                <RxUpdate/>
+              </Link>
             </span>
-            <span>
+            <span onClick={handleOpenAndCloseMenu}>
               <Link 
                 to='https://api.whatsapp.com/send?phone=5581997792028&text=Olá,%20estou%20utilizando%20a%20plataforma%20Conecta%20aluno%20e%20estou%20aqui%20para%20reportar%20um%20bug.' 
                 target='_blank'

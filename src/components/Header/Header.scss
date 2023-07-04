@@ -51,6 +51,10 @@
                     background-color: variables.$color-primary;
                     border-radius: 4px;
                     transition: all 0.3s linear;
+
+                    &:nth-child(2) {
+                        transition: all .3s ease;
+                    }
                     
                 }
                 & > .piece1 {
